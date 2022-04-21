@@ -91,7 +91,7 @@ function addBookToDOM(bTitle, bAuthor, bPages, bCover, bRead) {
     cardInfo.appendChild(pages);
 
     //cover
-    cardImg.style.backgroundImage = 'url(/img/coverNotFound.jpg)';
+    cardImg.style.backgroundImage = 'url(img/coverNotFound.jpg)';
     if (bCover !== '') {
         cardImg.style.backgroundImage = `url(${bCover})`;
     }
