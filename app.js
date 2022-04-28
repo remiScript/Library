@@ -5,22 +5,54 @@ const rainbowContainer = document.getElementById('rainbowContainer')
 const formContainer = document.getElementById('formContainer');
 const formSubmitBtn = document.getElementById('formSubmitBtn');
 
+// Need to create library function - it would create a new
+// library, even though we only need 1. The point is, it would
+// establish what a library is, define all of its functions.
+// If this was a real world example, once we've done this, someone
+// would call these functions and say library.addBook, or library.clearBooks
+// which would be easier to read and make more sense.
+
+let LibraryFactory = function () {
+    // create lib object
+    var library = {};
+
+    // parameters as keys for this object
+    library.titles = [];
+
+    // function to add book
+    library.addBook = function(){
+        return ('book added')
+    };
+    return library; 
+}
+
 
 // library array of all books
 let library = [];
 
-// Our constructor that creates book objects
-function Book(title, author, pages, cover, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.cover = cover;
-    this.read = read;
+// Our factory function that creates book objects
+function createBook(title, author, pages, cover, read) {
+    var book = {};
+
+    book.title = title;
+    book.author = author;
+    book.pages = pages;
+    book.cover = cover;
+    book.read = read;
+    return { title, 
+             author, 
+             pages, 
+             cover, 
+             read, 
+             sayTitle: function(){
+                 console.log(`Title: ${book.title}`);
+             }}
 }
 
 // the function that adds a book to the library array
 function addBookToLibrary(a, b, c, d, e) {
-    library.push(new Book(a, b, c, d, e));
+    library.push(createBook(a, b, c, d, e));
+    console.log(a);
     console.table(library);
 }
 
@@ -186,6 +218,9 @@ formSubmitBtn.addEventListener('click', function(e) {
     // we need to write a function that loops through each item in the array of objects and
     // runs addBookToDOM with the object values being the arguments
     library.forEach(book => {
+        // console.log(book);
+        // console.log(book.book);
+        // console.log(book.book.title);
         addBookToDOM(book.title, book.author, book.pages, book.cover, book.read);
     });
 
